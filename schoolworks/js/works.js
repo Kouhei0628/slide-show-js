@@ -12,24 +12,27 @@ const Carousels = document.querySelectorAll('.carousel');
 const slideBtn = document.querySelector('.slidebtn_wrap');
 const prev = document.querySelector('.prev');
 const next = document.querySelector('.next');
-
+//ポップアップ開く関数
 function popOpen(obj) {
     obj.classList.add('is-open');
 }
-
+//ポップアップ閉じる関数
 function popClose(obj) {
     obj.classList.remove('is-open');
 }
-
+//それぞれのサムネイルで処理を分ける
 links.forEach(el => {
     let index = [].slice.call(links).indexOf(el);
+    //クリックしたサムネイルの中身の画像を取得する
     let carouItems = Carousels[index].querySelectorAll('.__imgbox__img');
+    //その長さも取得
     let carLength = carouItems.length;
     el.addEventListener('click', () => {
         popOpen(poplinks[index]);
         popOpen(popWrap);
         popOpen(popBg);
         popOpen(Carousels[index]);
+        //画像の数が1だったらスライドボタン必要ないので消す
         if (Carousels[index].querySelectorAll('.__imgbox__img').length === 1) { slideBtn.classList.add('is-hidden'); } else { slideBtn.classList.remove('is-hidden'); }
         rmbtn.addEventListener('click', () => {
             popClose(poplinks[index]);
@@ -40,7 +43,6 @@ links.forEach(el => {
             // 動画は止める
             document.querySelector('.--video').pause();
             // 初期化↓
-            // for (let i = 0; i < Carousels.length; i++) { Carousels[i].style.transform = "scale(1)"; }
             for (let j = 0; j < carLength; j++) { carouItems[j].classList.remove('open'); }
         });
         popBg.addEventListener('click', () => {
@@ -50,17 +52,19 @@ links.forEach(el => {
             popClose(Carousels[index]);
             slideBtn.classList.add('is-visible');
             document.querySelector('.--video').pause();
-            // for (let i = 0; i < Carousels.length; i++) { Carousels[i].style.transform = "scale(1)"; }
+            // 初期化↓
             for (let j = 0; j < carLength; j++) { carouItems[j].classList.remove('open'); }
         });
 
+        // 戻る進むボタンの切り替え
         function showSlideBtn(b) { b.classList.toggle('is-visible'); }
 
         Carousels[index].addEventListener('click', () => showSlideBtn(slideBtn));
-
+        //サムネクリックで1番目の画像を表示
         carouItems[0].classList.add('open');
 
         let x = 0;
+        //戻るボタンの処理
         prev.addEventListener('click', () => {
             if (x === 0) {
                 // スライドしてインデックス番号が0に達したらループ
@@ -73,7 +77,7 @@ links.forEach(el => {
                 x -= 1;
             }
         });
-
+        //進むボタンの処理
         next.addEventListener('click', () => {
             if (x === carLength - 1) {
                 // スライドしてインデックス番号がmaxに達したらループ
