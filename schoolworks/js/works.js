@@ -30,7 +30,7 @@ links.forEach(el => {
         popOpen(popWrap);
         popOpen(popBg);
         popOpen(Carousels[index]);
-        if (Carousels[index].querySelectorAll('.__imgbox__img').length === 1) { slideBtn.classList.add('is-hidden'); } else { slideBtn.classList.remove('is-hidden'); }
+        (Carousels[index].querySelectorAll('.__imgbox__img').length === 1) ? slideBtn.classList.add('is-hidden'): slideBtn.classList.remove('is-hidden');
         rmbtn.addEventListener('click', () => {
             popClose(poplinks[index]);
             popClose(popWrap);
