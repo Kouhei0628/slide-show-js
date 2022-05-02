@@ -63,7 +63,7 @@ links.forEach(el => {
         let x = 0;
         prev.addEventListener('click', () => {
             if (x === 0) {
-                // スライドしてインデックス番号が0に達したらループ
+                //スライドしてインデックス番号が0に達したらループ
                 x = carLength - 1;
                 carouItems[carLength - 1].classList.add('open');
                 carouItems[0].classList.remove('open');
